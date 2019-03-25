@@ -22,19 +22,49 @@
     <Filter Include="Заголовочные файлы\Buchberger">
       <UniqueIdentifier>{87939539-bad6-4835-a2c9-dd28bf2c5c96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Заголовочные файлы\Arithmetic">
+      <UniqueIdentifier>{ed47c7e2-e0c0-4e05-9694-a531e3da6791}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Arithmetic">
+      <UniqueIdentifier>{fb12bbca-2205-46ee-90f3-dffbb5bb950f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\IO">
+      <UniqueIdentifier>{a12471bb-6008-45e7-a784-78407c6e7011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\Basic">
+      <UniqueIdentifier>{5e70f27c-03d6-4ec8-8d9a-845486606199}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Файлы исходного кода</Filter>
     </ClCompile>
-    <ClCompile Include="EquationSystem.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClCompile Include="Arithmetics.cpp">
+      <Filter>Файлы исходного кода\Arithmetic</Filter>
     </ClCompile>
-    <ClCompile Include="Monomial.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClCompile Include="AppliedArithmetic.cpp">
+      <Filter>Файлы исходного кода\Arithmetic</Filter>
     </ClCompile>
     <ClCompile Include="PolynomialInitializer.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Файлы исходного кода\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Monomial.cpp">
+      <Filter>Файлы исходного кода\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="EquationSystem.cpp">
+      <Filter>Файлы исходного кода\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="VariableValueInitializer.cpp">
+      <Filter>Файлы исходного кода\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Smalls.cpp">
+      <Filter>Файлы исходного кода\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Polynomial.cpp">
+      <Filter>Файлы исходного кода\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Writer.cpp">
+      <Filter>Файлы исходного кода\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -47,23 +77,41 @@
     <ClInclude Include="Monomial.h">
       <Filter>Заголовочные файлы\BasicStructures</Filter>
     </ClInclude>
-    <ClInclude Include="Arithmetics.h">
-      <Filter>Заголовочные файлы\BasicStructures</Filter>
-    </ClInclude>
     <ClInclude Include="ParsingException.h">
       <Filter>Заголовочные файлы\IO</Filter>
     </ClInclude>
     <ClInclude Include="PolynomialInitializer.h">
       <Filter>Заголовочные файлы\IO</Filter>
     </ClInclude>
-    <ClInclude Include="EnvironmentInitializer.cpp">
-      <Filter>Файлы исходного кода</Filter>
+    <ClInclude Include="ArithmeticException.h">
+      <Filter>Заголовочные файлы\Arithmetic</Filter>
     </ClInclude>
-    <ClInclude Include="EnvironmentInitializer.h">
+    <ClInclude Include="Arithmetics.h">
+      <Filter>Заголовочные файлы\Arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="AppliedArithmetic.h">
+      <Filter>Заголовочные файлы\Arithmetic</Filter>
+    </ClInclude>
+    <ClInclude Include="VariableValueInitializer.h">
       <Filter>Заголовочные файлы\IO</Filter>
     </ClInclude>
-    <ClInclude Include="ArithmeticException.h">
+    <ClInclude Include="Utility.h">
+      <Filter>Заголовочные файлы\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Smalls.h">
       <Filter>Заголовочные файлы\BasicStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="AbsentVariableException.h">
+      <Filter>Заголовочные файлы\BasicStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.cpp">
+      <Filter>Файлы исходного кода\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.h">
+      <Filter>Заголовочные файлы\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Writer.h">
+      <Filter>Заголовочные файлы\IO</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

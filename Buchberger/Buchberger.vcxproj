@@ -111,21 +111,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AppliedArithmetic.cpp" />
+    <ClCompile Include="Arithmetics.cpp" />
     <ClCompile Include="EquationSystem.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Monomial.cpp" />
+    <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="PolynomialInitializer.cpp" />
+    <ClCompile Include="Smalls.cpp" />
+    <ClCompile Include="VariableValueInitializer.cpp" />
+    <ClCompile Include="Writer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArithmeticException.h" />
+    <ClInclude Include="AppliedArithmetic.h" />
     <ClInclude Include="ParsingException.h" />
     <ClInclude Include="Arithmetics.h" />
     <ClInclude Include="EquationSystem.h" />
     <ClInclude Include="PolynomialInitializer.h" />
     <ClInclude Include="Monomial.h" />
     <ClInclude Include="Polynomial.h" />
-    <ClInclude Include="EnvironmentInitializer.cpp" />
-    <ClInclude Include="EnvironmentInitializer.h" />
+    <ClInclude Include="Environment.cpp" />
+    <ClInclude Include="Environment.h" />
+    <ClInclude Include="AbsentVariableException.h" />
+    <ClInclude Include="Utility.h" />
+    <ClInclude Include="VariableValueInitializer.h" />
+    <ClInclude Include="Smalls.h" />
+    <ClInclude Include="Writer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

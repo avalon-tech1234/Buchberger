@@ -1,27 +1,23 @@
 #pragma once
 #include "Monomial.h"
 
+
 namespace basic {
 
 
-	class Polynomial
+	class Polynomial : public std::vector <Monomial>
 	{
 	private:
-		std::vector <Monomial> monomials;
 		Monomial leadingMonomial;
 
 		void refreshLeadingMonomial() { leadingMonomial = getLeadingMonomial(); };
 
 	public:
-		Polynomial(std::vector <Monomial> in_monomials): monomials(in_monomials) {};
-		Polynomial() {};
-		~Polynomial()
-		{
-			std::vector<Monomial>().swap(monomials);
-		}
+		Polynomial(std::vector <Monomial> in_monomials): std::vector <Monomial>(in_monomials) {};
 
-		void remove_empty(); //удаление пустых мономов
 		Monomial getLeadingMonomial();
+
+		double substitute(ValuesList, Arithmetics);
 
 	};
 }

@@ -1,7 +1,7 @@
 #include "PolynomialInitializer.h"
 #include "ParsingException.h"
+#include "Utility.h"
 #include <string>
-#include <ctype.h>
 
 
 using namespace basic;
@@ -9,92 +9,58 @@ using namespace std;
 
 namespace my_IO {
 
-	void PolynomialInitializer::inputPolynomial(EquationSystem & input, string source)
+	void PolynomialInitializer::inputPolynomial(EquationSystem & input, string source, basic::Arithmetics rules)
 	{
-		symb_place = 0;
+		//symb_place = 0;
+		
 		do
 		{
 			symb = source[symb_place++];
 
 			if (symb < 0 || symb > 122) throw ParsingException("введен недопустимый символ", symb_place);
 
-			if (!isempty())
+			if (!isempty(symb))
 			{
 				switch (state)
 				{
 				case 0:
-					if (issign() || isdig()) to_state(1);
-					else if (isalph()) setMonomCoeff(1);
-					else if (istrail()) to_state(4);
+					if (issign(symb) || isdig(symb)) to_state(1);
+					else if (isalph(symb)) setMonomCoeff(1, rules);
+					else if (istrail(symb)) to_state(4);
 					else throw ParsingException("некорректное начало полинома", symb_place);
 					break;
 				case 1:
-					if (isdig()) str += symb;
-					else if (isalph()) setMonomCoeff(stoi(str, nullptr));
-					else if (istrail()) pushFreeMember(stoi(str, nullptr));
+					if (isdig(symb)) str += symb;
+					else if (isalph(symb)) setMonomCoeff(stoi(str, nullptr), rules);
+					else if (istrail(symb)) pushFreeMember(stoi(str, nullptr));
 					else throw ParsingException("некорректно введен коэффициент", symb_place);
 					break;
 				case 2:
-					if (isdig()) str += symb;
-					else if (issign() || istrail()) pushMonomial(get_var_num(input.getVariablesDictionary()), 1, istrail());
-					else if (iscap()) setGradeBase(input.getVariablesDictionary());
+					if (isdig(symb)) str += symb;
+					else if (issign(symb) || istrail(symb)) pushMonomial(get_var_num(input.getVariablesDictionary()), 1, istrail(symb));
+					else if (iscap(symb)) setGradeBase(input.getVariablesDictionary());
+					else if (isalph(symb)) setGrade(get_var_num(input.getVariablesDictionary()), 1);
 					else throw ParsingException("некорректно введено имя переменной", symb_place);
 					break;
 				case 3:
-					if (isdig()) to_state(5);
+					if (isdig(symb)) to_state(5);
 					else throw ParsingException("некорректно введена степень", symb_place);
 					break;
 				case 5:
-					if (isdig()) str += symb;
-					else if (issign() || istrail()) pushMonomial(base, stoi(str, nullptr), istrail());
-					else if (isalph()) setGrade(base, stoi(str, nullptr));
+					if (isdig(symb)) str += symb;
+					else if (issign(symb) || istrail(symb)) pushMonomial(base, stoi(str, nullptr), istrail(symb));
+					else if (isalph(symb)) setGrade(base, stoi(str, nullptr));
 					else throw ParsingException("некорректно введена степень", symb_place);
 					break;
 				}
 			}
 		} while (state != 4);
-		Polynomial p(monomials);
+		Polynomial p = monomials;
 		input.addPolynomial(&p);
 		cleanup();
 	}
 
-	// плюс или минус
-	bool PolynomialInitializer::issign()
-	{
-		return symb == '+' || symb == '-';
-	}
-
-	// символ \0 - NULL - конец строки (завершает работу машины)
-	bool PolynomialInitializer::istrail()
-	{
-		return symb == '\0';
-	}
-
-	// крышка (предваряет ввд степени)
-	bool PolynomialInitializer::iscap()
-	{
-		return symb == '^';
-	}
-
-	// цифра
-	bool PolynomialInitializer::isdig()
-	{
-		return isdigit(symb);
-	}
-
-	// буква
-	bool PolynomialInitializer::isalph()
-	{
-		return isalpha(symb);
-	}
-
-	// пустой символ (пробел или табуляция)
-	bool PolynomialInitializer::isempty()
-	{
-		return isblank(symb);
-	}
-
-	int PolynomialInitializer::get_var_num(std::map<std::string, int>* var_dic)
+	int PolynomialInitializer::get_var_num(Dictionary* var_dic)
 	{
 		std::map<std::string, int>::iterator it = var_dic->find(str);
 		if (it == var_dic->end())
@@ -127,14 +93,17 @@ namespace my_IO {
 		to_state(4);
 	}
 
-	void PolynomialInitializer::setMonomCoeff(int a)
+	// throws ParsingException if monomial is out of range
+	void PolynomialInitializer::setMonomCoeff(int a, basic::Arithmetics rules)
 	{
+		if (!AppliedArithmetic::belongs(a, rules))
+			throw ParsingException("При парсинге полинома встречен коэффициент, не принадлежащий заданному множеству", symb_place);
 		grades = vector<pair<int, int>>();
 		monom_coeff = a;
 		to_state(2);
 	}
 
-	void PolynomialInitializer::setGradeBase(std::map<std::string, int>* var_dic)
+	void PolynomialInitializer::setGradeBase(Dictionary* var_dic)
 	{
 		base = get_var_num(var_dic);
 		to_state(3);

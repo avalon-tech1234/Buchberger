@@ -2,17 +2,14 @@
 #include "PolynomialInitializer.h"
 #include "ParsingException.h"
 #include <iostream>
-#include <string>
 #include <fstream>
-#include <sstream>
-#include <string>
-
-
 
 using namespace my_IO;
 using namespace std;
 
 namespace basic {
+
+
 	EquationSystem::~EquationSystem()
 	{
 		map<string, int>().swap(var_dic);
@@ -24,7 +21,7 @@ namespace basic {
 		polynomials.push_back(*p);
 	}
 
-	void EquationSystem::read_from_console()
+	void EquationSystem::read_yourself_from_console(Arithmetics rules)
 	{
 		size_t str_num = 1;
 		PolynomialInitializer parser;
@@ -34,14 +31,14 @@ namespace basic {
 		while (true)
 		{
 			cout << (str_num++) << " > ";
-			getline(cin, cur); // читаем строку из консоли
+			getline(cin, cur);
 			if (cur == "end" || cur == "stop" || cur == "exit" || cur == "") break;
 			try {
-				parser.inputPolynomial(*this, cur); // извлекаем из нее полином и добавляем его в САУ
+				parser.inputPolynomial(*this, cur, rules);
 			}
 			catch (ParsingException& e)
 			{
-				cout << "Неверный ввод последнего полинома. При чтении символа " << e.where()<< " произошла ошибка: " << e.what() << endl;
+				cout << "Неверный ввод последнего полинома. При чтении символа " << e.where() << " произошла ошибка: " << e.what() << endl;
 				cout << "Введите полином корректно или нажмите Enter для окончания ввода" << endl;
 				str_num--;
 			}
@@ -52,25 +49,22 @@ namespace basic {
 				str_num--;
 			}
 		}
+		cout << "Ввод полиномов завершен" << endl;
+
 	}
 
-	void EquationSystem::read_from_file(string filename)
+	void EquationSystem::read_yourself_from_file(string filename, Arithmetics rules)
 	{
 		size_t str_num = 0;
-		size_t success_count = 0;
-		size_t fail_count = 0;
 		PolynomialInitializer parser;
 		string cur;
-
 		ifstream infile(filename);
 
-
-		while (true)
+		while (getline(infile, cur))
 		{
-			getline(infile, cur); // читаем строку из файла
 			if (cur == "end" || cur == "stop" || cur == "exit" || cur == "") break;
 			try {
-				parser.inputPolynomial(*this, cur); // извлекаем из нее полином и добавляем его в САУ
+				parser.inputPolynomial(*this, cur, rules);
 				cout << "Строка " << ++str_num << " успешно прочитана" << endl;
 			}
 			catch (ParsingException& e)
@@ -85,8 +79,19 @@ namespace basic {
 			}
 		}
 
-		cout << "Ввод полиномов завершен. Прочитано " << str_num << " полиномов"<< endl;
+		infile.close();
+		cout << "Ввод полиномов завершен. Прочитано " << str_num << " полиномов" << endl;
 	}
 
+	std::vector<double> EquationSystem::substitute(VariablesMap set, Arithmetics rules)
+	{
+		ValuesList list = ValuesList(var_dic, set);
+		vector<double> values;
+		for (int i = 0; i < polynomials.size(); i++)
+		{
+			values.push_back(polynomials[i].substitute(list, rules));
+		}
+		return values;
+	}
 
 }

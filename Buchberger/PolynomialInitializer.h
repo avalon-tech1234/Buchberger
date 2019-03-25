@@ -1,12 +1,13 @@
 #pragma once
 #include "EquationSystem.h"
+#include "Smalls.h"
 
 namespace my_IO
 {
 
 	class PolynomialInitializer
 	{
-	protected:
+	private:
 		char symb; // текущий символ
 		int symb_place; // номер обрабатываемого символа
 		int str_len; // длина входной строки
@@ -34,14 +35,8 @@ namespace my_IO
 
 		std::vector <basic::Monomial> monomials;
 
-		inline bool issign();
-		inline bool istrail();
-		inline bool iscap();
-		inline bool isdig();
-		inline bool isalph();
-		inline bool isempty();
 
-		inline int get_var_num(std::map<std::string, int>*);
+		inline int get_var_num(basic::Dictionary*);
 
 		void cleanup();
 
@@ -49,15 +44,16 @@ namespace my_IO
 
 		void pushMonomial(int last_base, int last_exp, bool is_end);
 		void pushFreeMember(int);
-		void setMonomCoeff(int a);
-		void setGradeBase(std::map<std::string, int>*);
+		void setMonomCoeff(int a, basic::Arithmetics rules);
+		void setGradeBase(basic::Dictionary*);
 		void setGrade(int base, int exp);
 
 
 	public:
 
-		//void inputEquationSystem(my_algorithm::EquationSystem* s);
-		void inputPolynomial(basic::EquationSystem &, std::string source);
+		void inputPolynomial(basic::EquationSystem &, std::string source, basic::Arithmetics rules);
+
+
 
 	};
 
