@@ -20,7 +20,7 @@ namespace my_IO
 		return symb == '\0';
 	}
 
-	// крышка (предвар€ет ввд степени)
+	// крышка (предвар€ет ввoд степени)
 	inline bool iscap(char symb)
 	{
 		return symb == '^';
@@ -29,19 +29,19 @@ namespace my_IO
 	// цифра
 	inline bool isdig(char symb)
 	{
-		return isdigit(symb);
+		return isdigit(symb) != 0;
 	}
 
 	// буква
 	inline bool isalph(char symb)
 	{
-		return isalpha(symb);
+		return isalpha(symb) != 0;
 	}
 
 	// пустой символ (пробел или табул€ци€)
 	inline bool isempty(char symb)
 	{
-		return isblank(symb);
+		return isblank(symb) != 0;
 	}
 
 	// trim from start (in place)
@@ -81,4 +81,5 @@ namespace my_IO
 		trim(s);
 		return s;
 	}
+
 }

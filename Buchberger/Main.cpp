@@ -1,7 +1,6 @@
 #include "PolynomialInitializer.h"
 #include "Environment.cpp"
 #include <cstdlib>
-#include <iostream>
 
 using namespace std;
 using namespace basic;
@@ -15,17 +14,21 @@ int main()
 
 
 	try {
+		cout << " ! ÏÐÎÃÐÀÌÌÀ ÍÀ×ÈÍÀÅÒ ÐÀÁÎÒÓ !" << endl << endl;
 		EquationSystem sys;
 		VariablesMap vars;
 		Arithmetics rules = Arithmetics::ARITHMETIC1;
-		Environment::initialize_environment(sys, vars, rules);
-		Environment::substitute(sys, vars, rules);
+		bool not_success = Environment::initialize_environment(sys, vars, rules);
+		if (!not_success) // åñëè îøèáîê íåò
+			Environment::substitute(sys, vars, rules);
+		else cout << "Ïîäñòàíîâêà íå ïðîèçâåäåíà" << endl;
 	}
 	catch (exception& e)
 	{
 		cout << "Ïðîèçîøëà îøèáêà. Òåêñò îøèáêè: " << e.what() << endl;
 	}
 
+	cout << endl << " ! ÏÐÎÃÐÀÌÌÀ ÇÀÊÀÍ×ÈÂÀÅÒ ÐÀÁÎÒÓ !" << endl << endl;
 	system("pause");
 	return 0;
 }

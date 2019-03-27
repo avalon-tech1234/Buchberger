@@ -5,7 +5,7 @@
 
 namespace basic {
 
-	class Monomial : public std::vector< std::pair<int, int> >
+	class Monomial : public std::vector< Grade >
 	{
 	private:
 
@@ -13,7 +13,7 @@ namespace basic {
 
 	public:
 
-		Monomial(int coeff, std::vector< std::pair<int, int> > in_grades);
+		Monomial(int coeff, std::vector< Grade > in_grades);
 		Monomial() {};
 
 		double substitute(ValuesList, basic::Arithmetics);

@@ -69,7 +69,7 @@ namespace arithmetics
 			if (a <= 1 && b <= 1) return a*b;
 			if (a > 1 && b <= 1) return 2 - (2 - a)*b;
 			if (a <= 1 && b > 1) return 2 - a*(2-b);
-			if (a > 1 && b > 1) return (2-a)*(2-b);
+			else return (2-a)*(2-b);
 		}
 		else throw ArithmeticException("операнды не принадлежат полю");
 	}
@@ -97,7 +97,7 @@ namespace arithmetics
 	double Arithmetic1::power(double base, int exponent)
 	{
 		double cur = 1;
-		for (int i = 0; i <= exponent; i++)
+		for (int i = 0; i < exponent; i++)
 		{
 			cur = multiply(cur, base);
 		}

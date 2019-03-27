@@ -15,8 +15,9 @@ namespace basic
 	ValuesList::ValuesList(Dictionary dic, VariablesMap vars)
 	{
 		Dictionary::iterator cur;
+		Dictionary::iterator end = dic.end();
 		VariablesMap::iterator var_it;
-		for (cur = dic.begin(); cur != dic.end(); ++cur)
+		for (cur = dic.begin(); cur != end; ++cur)
 		{
 			var_it = vars.find(cur->first);
 			if (var_it == vars.end()) throw AbsentVariableException("В наборе входных данных отсутствует переменная. Подстановка не может быть осуществлена", cur->first);
@@ -25,29 +26,32 @@ namespace basic
 	}
 
 
-	void VariablesMap::read_yourself_from_file(string filename, Arithmetics rules)
+	bool VariablesMap::read_yourself_from_file(string filename, Arithmetics rules)
 	{
+		bool flag_result = false;
+
 		size_t str_num = 0;
 		VariableValueInitializer parser;
 		string cur;
 		ifstream infile(filename);
 
-		while (getline(infile, cur))
-		{
-			if (cur == "end" || cur == "stop" || cur == "exit" || cur == "") break;
-			try {
-				parser.inputVariableValue(*this, cur, rules);
-				cout << "Строка " << ++str_num << " успешно прочитана" << endl;
-			}
-			catch (exception& e)
+		try {
+			while (getline(infile, cur))
 			{
-				cout << "Неверный ввод значения на строке " << str_num << ". Произошла ошибка " << e.what() << endl;
-				break;
+				if (cur == "end" || cur == "stop" || cur == "exit" || cur == "") break;
+				parser.inputVariableValue(*this, cur, rules);
+				cout << "   Строка " << ++str_num << " успешно прочитана" << endl;
 			}
+		}
+		catch (exception& e)
+		{
+			cout << "Неверный ввод значения на строке " << str_num << ". Произошла ошибка " << e.what() << endl;
+			flag_result = true;
 		}
 
 		infile.close();
 		cout << "Ввод значений переменных завершен. Прочитано " << str_num << " строк" << endl;
+		return flag_result;
 
 	}
 }

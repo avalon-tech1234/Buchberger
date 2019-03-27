@@ -9,6 +9,7 @@ namespace basic
 		switch (type) {
 		case Arithmetics::TRADITIONAL: return TraditionalArithmetic::summarize(a, b);
 		case Arithmetics::ARITHMETIC1: return Arithmetic1::summarize(a, b);
+		default: throw ArithmeticException("Unsupported arithmetic used");
 		}
 	}
 
@@ -17,6 +18,7 @@ namespace basic
 		switch (type) {
 		case Arithmetics::TRADITIONAL: return TraditionalArithmetic::multiply(a, b);
 		case Arithmetics::ARITHMETIC1: return Arithmetic1::multiply(a, b);
+		default: throw ArithmeticException("Unsupported arithmetic used");
 		}
 	}
 
@@ -25,6 +27,7 @@ namespace basic
 		switch (type) {
 		case Arithmetics::TRADITIONAL: return TraditionalArithmetic::subtract(a, b);
 		case Arithmetics::ARITHMETIC1: return Arithmetic1::subtract(a, b);
+		default: throw ArithmeticException("Unsupported arithmetic used");
 		}
 	}
 
@@ -33,6 +36,7 @@ namespace basic
 		switch (type) {
 		case Arithmetics::TRADITIONAL: return TraditionalArithmetic::divide(a, b);
 		case Arithmetics::ARITHMETIC1: return Arithmetic1::divide(a, b);
+		default: throw ArithmeticException("Unsupported arithmetic used");
 		}
 	}
 
@@ -41,6 +45,7 @@ namespace basic
 		switch (type) {
 		case Arithmetics::TRADITIONAL: return TraditionalArithmetic::power(a, exp);
 		case Arithmetics::ARITHMETIC1: return Arithmetic1::power(a, exp);
+		default: throw ArithmeticException("Unsupported arithmetic used");
 		}
 	}
 
@@ -49,6 +54,7 @@ namespace basic
 		switch (type) {
 		case Arithmetics::TRADITIONAL: return TraditionalArithmetic::belongs(a);
 		case Arithmetics::ARITHMETIC1: return Arithmetic1::belongs(a);
+		default: throw ArithmeticException("Unsupported arithmetic used");
 		}
 	}
 }

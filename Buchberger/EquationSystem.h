@@ -1,7 +1,5 @@
 #pragma once
 #include "Polynomial.h"
-#include "AppliedArithmetic.h"
-#include "Smalls.h"
 
 namespace basic {
 
@@ -25,10 +23,11 @@ namespace basic {
 
 		// инициализация через консоль. вводить полиномы по одному на строку
 		// в конце на новой строке ввести "end"
+		// не выкидывает ошибок - любой ввод корректный
 		void read_yourself_from_console(basic::Arithmetics rules);
 
 		// инициализация из файла
-		void read_yourself_from_file(std::string filename, basic::Arithmetics rules);
+		bool read_yourself_from_file(std::string filename, basic::Arithmetics rules);
 
 		std::vector<double> substitute(basic::VariablesMap, basic::Arithmetics);
 

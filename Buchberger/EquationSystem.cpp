@@ -53,41 +53,45 @@ namespace basic {
 
 	}
 
-	void EquationSystem::read_yourself_from_file(string filename, Arithmetics rules)
+	bool EquationSystem::read_yourself_from_file(string filename, Arithmetics rules)
 	{
+		bool flag_result = false;
+
 		size_t str_num = 0;
 		PolynomialInitializer parser;
 		string cur;
 		ifstream infile(filename);
 
-		while (getline(infile, cur))
-		{
-			if (cur == "end" || cur == "stop" || cur == "exit" || cur == "") break;
-			try {
+		try {
+			while (getline(infile, cur))
+			{
+				if (cur == "end" || cur == "stop" || cur == "exit" || cur == "") break;
 				parser.inputPolynomial(*this, cur, rules);
-				cout << "Строка " << ++str_num << " успешно прочитана" << endl;
+				cout << "   Строка " << ++str_num << " успешно прочитана" << endl;
 			}
-			catch (ParsingException& e)
-			{
-				cout << "Неверный ввод полинома на строке " << str_num << ". При чтении символа " << e.where() << " произошла ошибка: " << e.what() << endl;
-				break;
-			}
-			catch (exception& e)
-			{
-				cout << "Неверный ввод полинома на строке " << str_num << ". Произошла ошибка " << e.what() << endl;
-				break;
-			}
+		}
+		catch (ParsingException& e)
+		{
+			cout << "Неверный ввод полинома на строке " << str_num << ". При чтении символа " << e.where() << " произошла ошибка: " << e.what() << endl;
+			flag_result = true;
+		}
+		catch (exception& e)
+		{
+			cout << "Неверный ввод полинома на строке " << str_num << ". Произошла ошибка " << e.what() << endl;
+			flag_result = true;
 		}
 
 		infile.close();
 		cout << "Ввод полиномов завершен. Прочитано " << str_num << " полиномов" << endl;
+		return flag_result;
 	}
 
 	std::vector<double> EquationSystem::substitute(VariablesMap set, Arithmetics rules)
 	{
 		ValuesList list = ValuesList(var_dic, set);
 		vector<double> values;
-		for (int i = 0; i < polynomials.size(); i++)
+		size_t s = polynomials.size();
+		for (size_t i = 0; i < s; i++)
 		{
 			values.push_back(polynomials[i].substitute(list, rules));
 		}
