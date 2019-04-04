@@ -1,5 +1,6 @@
 #pragma once
-#include "Smalls.h"
+#include "Grade.h"
+#include "Arithmetics.h"
 
 
 
@@ -16,7 +17,7 @@ namespace basic {
 		Monomial(int coeff, std::vector< Grade > in_grades);
 		Monomial() {};
 
-		double substitute(ValuesList, basic::Arithmetics);
+		double substitute(const std::vector<double> values, const basic::IArithmetic* rules);
 
 		friend int compare(const Monomial& m1, const Monomial& m2);
 		friend bool operator == (const Monomial& m1, const Monomial& m2) { return compare(m1, m2) == 0; }

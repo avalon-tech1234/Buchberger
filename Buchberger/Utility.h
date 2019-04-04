@@ -8,40 +8,41 @@
 namespace my_IO
 {
 
-	// плюс или минус
-	inline bool issign(char symb)
+	enum class SymbolTypes
 	{
-		return symb == '+' || symb == '-';
+		unknown,
+		sign,
+		cap,
+		digit,
+		letter,
+		empty,
+		trail,
+		open_comment,
+		close_comment,
+
+		// доп. значени€
+		plus,
+		minus
+	};
+
+	inline SymbolTypes what_type(char symb)
+	{
+		if (symb == '+' || symb == '-') return SymbolTypes::sign;
+		if (symb == '\0') return SymbolTypes::trail;
+		if (symb == '^') return SymbolTypes::cap;
+		if (isdigit(symb) != 0) return SymbolTypes::digit;
+		if (isalpha(symb) != 0) return SymbolTypes::letter;
+		if (isblank(symb) != 0) return SymbolTypes::empty;
+		if (symb == '[') return SymbolTypes::open_comment;
+		if (symb == ']') return SymbolTypes::close_comment;
+		return SymbolTypes::unknown;
 	}
 
-	// символ \0 - NULL - конец строки (завершает работу машины)
-	inline bool istrail(char symb)
+	inline SymbolTypes what_coeff(char symb)
 	{
-		return symb == '\0';
-	}
-
-	// крышка (предвар€ет ввoд степени)
-	inline bool iscap(char symb)
-	{
-		return symb == '^';
-	}
-
-	// цифра
-	inline bool isdig(char symb)
-	{
-		return isdigit(symb) != 0;
-	}
-
-	// буква
-	inline bool isalph(char symb)
-	{
-		return isalpha(symb) != 0;
-	}
-
-	// пустой символ (пробел или табул€ци€)
-	inline bool isempty(char symb)
-	{
-		return isblank(symb) != 0;
+		if (symb == '+') return SymbolTypes::plus;
+		if (symb == '-') return SymbolTypes::minus;
+		return SymbolTypes::digit;
 	}
 
 	// trim from start (in place)

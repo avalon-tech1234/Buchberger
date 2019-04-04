@@ -33,8 +33,7 @@ namespace basic
 		return 0;
 	}
 
-	// TODO: оптимизировать поиск с учетом того, что массив отсортирован
-	double Monomial::substitute(ValuesList list, Arithmetics rules)
+	double Monomial::substitute(const vector<double> values, const basic::IArithmetic* rules)
 	{
 		double result = 1;
 		double base, pow;
@@ -42,10 +41,10 @@ namespace basic
 		size_t s = size();
 		for (size_t i = 0; i < s; i++)
 		{
-			base = list.find(operator[](i).base)->second;
+			base = values[operator[](i).base];
 			exp = operator[](i).exp;
-			pow = AppliedArithmetic::power(base, exp, rules);
-			result = AppliedArithmetic::multiply(result, pow, rules);
+			pow = rules->power(base, exp);
+			result = rules->multiply(result, pow);
 		}
 		return result*coeff;
 	}

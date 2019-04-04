@@ -13,14 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Заголовочные файлы\BasicStructures">
-      <UniqueIdentifier>{66f46bc9-3197-4fc9-8df1-b21e7bea714d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Заголовочные файлы\IO">
       <UniqueIdentifier>{ce358b06-6167-49b6-abc2-30bdc97300f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Заголовочные файлы\Buchberger">
-      <UniqueIdentifier>{87939539-bad6-4835-a2c9-dd28bf2c5c96}</UniqueIdentifier>
     </Filter>
     <Filter Include="Заголовочные файлы\Arithmetic">
       <UniqueIdentifier>{ed47c7e2-e0c0-4e05-9694-a531e3da6791}</UniqueIdentifier>
@@ -34,6 +28,18 @@
     <Filter Include="Файлы исходного кода\Basic">
       <UniqueIdentifier>{5e70f27c-03d6-4ec8-8d9a-845486606199}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Заголовочные файлы\Exceptions">
+      <UniqueIdentifier>{e945a135-00c3-4dbe-8518-443aa2c650af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\Basic">
+      <UniqueIdentifier>{66f46bc9-3197-4fc9-8df1-b21e7bea714d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Заголовочные файлы\IO\Parsing">
+      <UniqueIdentifier>{fc6a5847-05d3-450f-b028-fbf5f5a0e372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы исходного кода\IO\Parsing">
+      <UniqueIdentifier>{2d807b4e-c0c4-4286-91f4-4ace4b5d49e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -42,22 +48,10 @@
     <ClCompile Include="Arithmetics.cpp">
       <Filter>Файлы исходного кода\Arithmetic</Filter>
     </ClCompile>
-    <ClCompile Include="AppliedArithmetic.cpp">
-      <Filter>Файлы исходного кода\Arithmetic</Filter>
-    </ClCompile>
-    <ClCompile Include="PolynomialInitializer.cpp">
-      <Filter>Файлы исходного кода\IO</Filter>
-    </ClCompile>
     <ClCompile Include="Monomial.cpp">
       <Filter>Файлы исходного кода\Basic</Filter>
     </ClCompile>
     <ClCompile Include="EquationSystem.cpp">
-      <Filter>Файлы исходного кода\Basic</Filter>
-    </ClCompile>
-    <ClCompile Include="VariableValueInitializer.cpp">
-      <Filter>Файлы исходного кода\IO</Filter>
-    </ClCompile>
-    <ClCompile Include="Smalls.cpp">
       <Filter>Файлы исходного кода\Basic</Filter>
     </ClCompile>
     <ClCompile Include="Polynomial.cpp">
@@ -66,52 +60,70 @@
     <ClCompile Include="Writer.cpp">
       <Filter>Файлы исходного кода\IO</Filter>
     </ClCompile>
+    <ClCompile Include="Reader.cpp">
+      <Filter>Файлы исходного кода\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Parser.cpp">
+      <Filter>Файлы исходного кода\IO\Parsing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EquationSystem.h">
-      <Filter>Заголовочные файлы\BasicStructures</Filter>
+      <Filter>Заголовочные файлы\Basic</Filter>
     </ClInclude>
     <ClInclude Include="Polynomial.h">
-      <Filter>Заголовочные файлы\BasicStructures</Filter>
+      <Filter>Заголовочные файлы\Basic</Filter>
     </ClInclude>
     <ClInclude Include="Monomial.h">
-      <Filter>Заголовочные файлы\BasicStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="ParsingException.h">
-      <Filter>Заголовочные файлы\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="PolynomialInitializer.h">
-      <Filter>Заголовочные файлы\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="ArithmeticException.h">
-      <Filter>Заголовочные файлы\Arithmetic</Filter>
+      <Filter>Заголовочные файлы\Basic</Filter>
     </ClInclude>
     <ClInclude Include="Arithmetics.h">
       <Filter>Заголовочные файлы\Arithmetic</Filter>
     </ClInclude>
-    <ClInclude Include="AppliedArithmetic.h">
-      <Filter>Заголовочные файлы\Arithmetic</Filter>
-    </ClInclude>
-    <ClInclude Include="VariableValueInitializer.h">
-      <Filter>Заголовочные файлы\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Заголовочные файлы\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Smalls.h">
-      <Filter>Заголовочные файлы\BasicStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="AbsentVariableException.h">
-      <Filter>Заголовочные файлы\BasicStructures</Filter>
-    </ClInclude>
-    <ClInclude Include="Environment.cpp">
-      <Filter>Файлы исходного кода\IO</Filter>
-    </ClInclude>
-    <ClInclude Include="Environment.h">
-      <Filter>Заголовочные файлы\IO</Filter>
-    </ClInclude>
     <ClInclude Include="Writer.h">
       <Filter>Заголовочные файлы\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Reader.h">
+      <Filter>Заголовочные файлы\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="ArithmeticException.h">
+      <Filter>Заголовочные файлы\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="AbsentVariableException.h">
+      <Filter>Заголовочные файлы\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="ParsingException.h">
+      <Filter>Заголовочные файлы\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.cpp">
+      <Filter>Файлы исходного кода</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Заголовочные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="MonomialBuilder.h">
+      <Filter>Заголовочные файлы\IO\Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="Parser.h">
+      <Filter>Заголовочные файлы\IO\Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="ParserBackground.h">
+      <Filter>Заголовочные файлы\IO\Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="PolynomialBuilder.h">
+      <Filter>Заголовочные файлы\IO\Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Заголовочные файлы\IO\Parsing</Filter>
+    </ClInclude>
+    <ClInclude Include="Grade.h">
+      <Filter>Заголовочные файлы\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="InitialisationFailedException.h">
+      <Filter>Заголовочные файлы\Exceptions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

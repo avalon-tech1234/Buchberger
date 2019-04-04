@@ -1,11 +1,8 @@
 #include "EquationSystem.h"
-#include "PolynomialInitializer.h"
-#include "ParsingException.h"
 #include <iostream>
-#include <fstream>
 
-using namespace my_IO;
 using namespace std;
+using namespace basic;
 
 namespace basic {
 
@@ -21,81 +18,17 @@ namespace basic {
 		polynomials.push_back(*p);
 	}
 
-	void EquationSystem::read_yourself_from_console(Arithmetics rules)
+	std::vector<double> EquationSystem::substitute(const vector<double> values)
 	{
-		size_t str_num = 1;
-		PolynomialInitializer parser;
-		string cur;
-		setlocale(0, "");
-
-		while (true)
-		{
-			cout << (str_num++) << " > ";
-			getline(cin, cur);
-			if (cur == "end" || cur == "stop" || cur == "exit" || cur == "") break;
-			try {
-				parser.inputPolynomial(*this, cur, rules);
-			}
-			catch (ParsingException& e)
-			{
-				cout << "Неверный ввод последнего полинома. При чтении символа " << e.where() << " произошла ошибка: " << e.what() << endl;
-				cout << "Введите полином корректно или нажмите Enter для окончания ввода" << endl;
-				str_num--;
-			}
-			catch (exception& e)
-			{
-				cout << "Неверный ввод последнего полинома. Произошла ошибка " << e.what() << endl;
-				cout << "Введите полином корректно или нажмите Enter для окончания ввода" << endl;
-				str_num--;
-			}
-		}
-		cout << "Ввод полиномов завершен" << endl;
-
-	}
-
-	bool EquationSystem::read_yourself_from_file(string filename, Arithmetics rules)
-	{
-		bool flag_result = false;
-
-		size_t str_num = 0;
-		PolynomialInitializer parser;
-		string cur;
-		ifstream infile(filename);
-
-		try {
-			while (getline(infile, cur))
-			{
-				if (cur == "end" || cur == "stop" || cur == "exit" || cur == "") break;
-				parser.inputPolynomial(*this, cur, rules);
-				cout << "   Строка " << ++str_num << " успешно прочитана" << endl;
-			}
-		}
-		catch (ParsingException& e)
-		{
-			cout << "Неверный ввод полинома на строке " << str_num << ". При чтении символа " << e.where() << " произошла ошибка: " << e.what() << endl;
-			flag_result = true;
-		}
-		catch (exception& e)
-		{
-			cout << "Неверный ввод полинома на строке " << str_num << ". Произошла ошибка " << e.what() << endl;
-			flag_result = true;
-		}
-
-		infile.close();
-		cout << "Ввод полиномов завершен. Прочитано " << str_num << " полиномов" << endl;
-		return flag_result;
-	}
-
-	std::vector<double> EquationSystem::substitute(VariablesMap set, Arithmetics rules)
-	{
-		ValuesList list = ValuesList(var_dic, set);
-		vector<double> values;
+		vector<double> result;
+		result.reserve(polynomials.size());
 		size_t s = polynomials.size();
 		for (size_t i = 0; i < s; i++)
 		{
-			values.push_back(polynomials[i].substitute(list, rules));
+			result.push_back(polynomials[i].substitute(values, rules));
+			cout << "   Найдено значение полинома " << (i + 1) << " из " << s << endl;
 		}
-		return values;
+		return result;
 	}
 
 }

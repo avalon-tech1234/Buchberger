@@ -1,20 +1,28 @@
 #pragma once
 #include "EquationSystem.h"
 
-namespace my_IO
+
+
+class Environment
 {
-	class Environment
+private:
+
+	basic::EquationSystem system;
+	basic::IArithmetic* rules;
+	std::vector<double> values;
+
+	void initialize_system();
+	void initialize_variables();
+
+public:
+
+	bool initialize_everything();
+	void substitute();
+
+	Environment(): rules(), system(rules)
 	{
-	private:
+		rules = new basic::Arithmetic1();
+		system = basic::EquationSystem(rules);
+	}
 
-	static bool initialize_system(basic::EquationSystem& sys, basic::Arithmetics rules);
-
-	static bool initialize_variables(basic::VariablesMap& var_set, basic::Arithmetics rules);
-
-	public:
-		static bool initialize_environment(basic::EquationSystem& sys, basic::VariablesMap& var_set, basic::Arithmetics rules);
-
-		static bool substitute(basic::EquationSystem& sys, basic::VariablesMap& var_set, basic::Arithmetics rules);
-	
-	};
-}
+};

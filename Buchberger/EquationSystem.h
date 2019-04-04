@@ -6,33 +6,37 @@ namespace basic {
 
 	class EquationSystem
 	{
+	const basic::IArithmetic* rules;
 	private:
-		Dictionary var_dic; //словарь переменных: первое значение - "внешнее" имя переменной, второе - "для внутреннего использования"
+		std::map<std::string, int> var_dic; //словарь переменных: первое значение - "внешнее" имя переменной, второе - "для внутреннего использования"
 		std::vector <Polynomial> polynomials;	
 
 	public:
 
-		EquationSystem() {}
+		EquationSystem(basic::IArithmetic* rules): rules(rules) {}
 
 		~EquationSystem();
 
 		void addPolynomial(Polynomial* p);
 
-		// TODO: переписать PolynomialInitializer::inputPolynomial() так, чтобы эта функция была не нужна
-		Dictionary* getVariablesDictionary() { return &var_dic; };
+		const std::map<std::string, int>& getVariablesDictionary()
+		{
+			return var_dic; 
+		};
 
-		// инициализация через консоль. вводить полиномы по одному на строку
-		// в конце на новой строке ввести "end"
-		// не выкидывает ошибок - любой ввод корректный
-		void read_yourself_from_console(basic::Arithmetics rules);
+		void setVariablesDictionary(const std::map<std::string, int>& in)
+		{
+			var_dic = in;
+		}
 
-		// инициализация из файла
-		bool read_yourself_from_file(std::string filename, basic::Arithmetics rules);
-
-		std::vector<double> substitute(basic::VariablesMap, basic::Arithmetics);
+		std::vector<double> substitute(const std::vector<double> values);
 
 		std::string toString();
 
+		const basic::IArithmetic* getRules() const
+		{
+			return rules;
+		}
 
 	};
 }

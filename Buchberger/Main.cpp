@@ -1,11 +1,8 @@
-#include "PolynomialInitializer.h"
 #include "Environment.cpp"
-#include <cstdlib>
+#include <iostream>
 
 using namespace std;
 using namespace basic;
-using namespace my_IO;
-
 
 int main()
 {
@@ -15,12 +12,11 @@ int main()
 
 	try {
 		cout << " ! ПРОГРАММА НАЧИНАЕТ РАБОТУ !" << endl << endl;
-		EquationSystem sys;
-		VariablesMap vars;
-		Arithmetics rules = Arithmetics::ARITHMETIC1;
-		bool not_success = Environment::initialize_environment(sys, vars, rules);
-		if (!not_success) // если ошибок нет
-			Environment::substitute(sys, vars, rules);
+		Environment env;
+		bool result = env.initialize_everything();
+
+		if (!result) // если ошибок нет
+			env.substitute();
 		else cout << "Подстановка не произведена" << endl;
 	}
 	catch (exception& e)

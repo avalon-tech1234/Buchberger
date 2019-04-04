@@ -15,9 +15,11 @@ namespace basic {
 	public:
 		Polynomial(std::vector <Monomial> in_monomials): std::vector <Monomial>(in_monomials) {};
 
+		Polynomial() {}
+
 		Monomial getLeadingMonomial();
 
-		double substitute(ValuesList, Arithmetics);
+		double substitute(const std::vector<double> values, const basic::IArithmetic* rules);
 
 	};
 }

@@ -5,11 +5,14 @@
 #include <limits>
 
 using namespace std;
+using namespace basic;
 
 namespace my_IO
 {
-	void Writer::writePolynomialValues(basic::EquationSystem& sys, std::vector<double> result, string input, string output)
+	void Writer::writePolynomialValues(const EquationSystem& sys, const std::vector<double>& result, string input, string output)
 	{
+		cout << "Набор значений переменных подставлен в полиномы. Результат подстановки записан в файл " <<output<< endl;
+
 		ofstream out;
 		out.open(output);
 

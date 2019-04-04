@@ -4,51 +4,50 @@
 // В данном файле описывается абстрактный класс, определяющий некоторое кольцо/поле, над которым рассматривается кольцо многочленов.
 // Далее описываются классы, описывающие устройство конкретных полей/колец
 
-namespace arithmetics
+namespace basic
 {
 
-	// TODO: в реализациях Арифметики добавить везде проверку на то, что оба операнда принадлежат полю
+	// TODO: навести порядок в делении
 
 	
-	struct IArithmetic
+	class IArithmetic
 	{
 	protected:
-		static double e_divide(double a, double b, double zero);
+		double e_divide(double a, double b, double zero) const;
 
 	public:
-		static double getAddInverse(double a);
-		static double getMultInverse(double a);
-		static double summarize(double a, double b);
-		static double multiply(double a, double b);
-		static double subtract(double a, double b);
-		static double power(double base, int exponent);
-		static bool belongs(double a);
+		virtual double getAddInverse(double a) const;
+		virtual double getMultInverse(double a) const;
+		virtual double summarize(double a, double b) const;
+		virtual double multiply(double a, double b) const;
+		virtual double subtract(double a, double b) const;
+		virtual bool belongs(double a) const;
+
+		double power(double base, int exponent) const;
 	};
 
 	
 
-	struct TraditionalArithmetic : public IArithmetic
+	class TraditionalArithmetic : public IArithmetic
 	{
 	public:
-		static double getAddInverse(double a) { return -1 * a; }
-		static double getMultInverse(double a);
-		static double summarize(double a, double b) { return a + b; };
-		static double multiply(double a, double b) { return a*b; };
-		static double divide(double a, double b) { return e_divide(a, b, 0); }
-		static bool belongs(double a) { return true; }
+		double getAddInverse(double a) const { return -1 * a; }
+		double getMultInverse(double a) const;
+		double summarize(double a, double b) const { return a + b; };
+		double multiply(double a, double b) const { return a*b; };
+		double divide(double a, double b) const { return e_divide(a, b, 0); }
+		bool belongs(double a) const { return true; }
 	};
 
 	// для Сергея-математика, ТЗ от 13.03.2019
 	class Arithmetic1 : public IArithmetic
 	{
 	public:
-		static double getAddInverse(double a);
-		static double summarize(double a, double b);
-		static double multiply(double a, double b);
-		static bool belongs(double a);
-		static double divide(double a, double b);
-
-		static double power(double base, int exponent);
+		double getAddInverse(double a) const;
+		double summarize(double a, double b) const;
+		double multiply(double a, double b) const;
+		bool belongs(double a) const;
+		double divide(double a, double b) const;
 
 	};
 }
