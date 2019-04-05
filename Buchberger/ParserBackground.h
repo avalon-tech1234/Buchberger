@@ -54,7 +54,7 @@ namespace my_IO
 		}
 		inline SymbolTypes cur_coeff()
 		{
-			return what_coeff(symb);
+			return what_coeff(str[0]);
 		}
 
 		inline void pause()
